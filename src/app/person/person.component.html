@@ -1,0 +1,45 @@
+<div class="container">
+    <h3 class="text-primary text-center mx-2">FORMULAIRE DE LA PERSONNE</h3>
+    <form class="form" (ngSubmit)="onSubmit()" #personForm="ngForm">
+        <fieldset>
+            <legend>infos personnlles</legend>
+            <div class="form-group">
+                <label class="control-label" for="nom" >Nom de la personne</label>
+                 <input class="form-control" type="text" parttern="^[a-zA-àéè]{1,25}$" [(ngModel)]="personne.nom" name="nom" minlength="3" required #nom="ngModel">
+                <!-- <div class="alert alert-danger" [hidden]="nom.valid || nom.pristine">
+                    le nom de cette personne est requis
+                </div> -->
+                <div class="alert alert-danger" *ngIf="formErrors.nom">
+                    {{formErrors.nom}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="prenoms">Prenoms de la personne</label>
+                <input class="form-control" type="text" name="prenoms" [(ngModel)]="personne.prenoms" required>
+                <div class="alert alert-danger" *ngIf="formErrors.prenoms">
+                    {{formErrors.prenoms}}
+                </div>
+            </div>
+
+            <!-- <div class="form-group"> -->
+                <label class="control-label" for="genre">Genre de la personne</label> <br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="homme" [(ngModel)]="personne.gender">
+                    <label class="form-check-label" for="homme">masculin</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="femme" [(ngModel)]="personne.gender">
+                    <label class="form-check-label" for="femme">feminin</label>
+                </div>
+            <!-- </div> -->
+
+            <div class="form-group">
+                <label for="birthday">Birthday</label>
+                <input type="date" class="form-control" id="birthday" name="birthday" [(ngModel)]="personne.birthday">
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!personForm.form.valid">Soumettre</button>
+            <button type="reset" class="btn btn-default ml-2">Effacer</button>
+        </fieldset>
+    </form>
+</div>
